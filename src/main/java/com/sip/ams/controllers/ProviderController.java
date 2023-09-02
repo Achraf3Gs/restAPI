@@ -50,10 +50,11 @@ public class ProviderController {
 
 
     @DeleteMapping("/{providerId}")
-    public ResponseEntity<?> deleteProvider(@PathVariable Long providerId) {
+    public Long deleteProvider(@PathVariable Long providerId) {
         return providerRepository.findById(providerId).map(provider -> {
         	providerRepository.delete(provider);
-            return ResponseEntity.ok().build();
+            //return ResponseEntity.ok().build();
+        	return providerId;
         }).orElseThrow(() -> new IllegalArgumentException("ProviderId " + providerId + " not found"));
     }
     
